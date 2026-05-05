@@ -27,18 +27,35 @@ module.exports.registerUser = async (req, res, next) => {
     }
 }
 
-module.exports.loginUser = async(req, res, next) => {
-    const errors = validationUser(req)
-    if(!errors.isEmpty()){
-        return res.satus(400).json( { errors: errors.array() })
-    }
-    const{ email, body } = req.body
-
-    const user = await userModel.findOne({ email }).select("+password")
-
-    if(!user){
-        return res.status(401).json({ message: 'invailid email/password'})
+// ✅ wrap loginUser in try/catch
+module.exports.loginUser = async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
     }
 
-    const isMatch = await user.comparePassword(password)
+    try {
+        const { email, password } = req.body;
+        const user = await userModel.findOne({ email }).select('+password');
+
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid email/password' });
+        }
+
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid email/password' });
+        }
+
+        const token = user.generateAuthToken();
+        res.cookie('token', token); // 7 days
+        res.status(200).json({ user, token });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
+module.exports.getUserProfile = async (req, res, next) => {
+    res.status(200).json(req.user);
 }
