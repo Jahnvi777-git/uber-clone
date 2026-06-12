@@ -32,7 +32,7 @@ const UserSignup = () => {
         <Link to='/UserLogin' className='text-blue-600'>Already have an account? Log in</Link>
       </div>
       <div>
-        <Link to='/CaptainSignup' className='bg-[#10b461] flex flex-center justify-center text-white font-semibold mb-7 rounded px-4 py-2 text-lg w-full placeholder:text-base'>Sign in as Captain</Link>
+        <p className='text-[10px] leading-tight'>By proceeding, you consent to get calls, WhatsApp or SMS messages, including by automated means, from Uber and its affiliates members to the number provided. </p>
       </div>
     </div>
   )
