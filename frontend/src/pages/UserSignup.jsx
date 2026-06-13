@@ -7,6 +7,16 @@ const UserSignup = () => {
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [userData, setUserData] = useState({})
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+    setUserData({fullName: {firstName: firstName, lastName: lastName}, email: email, password: password})
+    setEmail('')
+    setPassword('')
+    setFirstName('')
+    setLastName('')
+  }
 
   return (
     <div className='p-7 h-screen flex flex-col justify-between'>
@@ -32,7 +42,7 @@ const UserSignup = () => {
         <Link to='/UserLogin' className='text-blue-600'>Already have an account? Log in</Link>
       </div>
       <div>
-        <p className='text-[10px] leading-tight'>By proceeding, you consent to get calls, WhatsApp or SMS messages, including by automated means, from Uber and its affiliates members to the number provided. </p>
+          <p className='text-[10px] leading-tight'>This site is proteted by reCAPTCHA and the <span className='underline'>Google Privacy Policy</span> and <span className='underline'>Terms of Service</span> applies.</p>
       </div>
     </div>
   )

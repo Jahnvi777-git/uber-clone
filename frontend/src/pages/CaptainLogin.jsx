@@ -8,9 +8,7 @@ const CaptainLogin = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    console.log(email, password)
     setCaptainData({email: email, password: password})
-    console.log(captainData)
     setEmail('')
     setPassword('')
   }

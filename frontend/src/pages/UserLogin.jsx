@@ -8,9 +8,7 @@ const UserLogin = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    console.log(email, password)
     setUserData({email: email, password: password})
-    console.log(userData)
     setEmail('')
     setPassword('')
   }
