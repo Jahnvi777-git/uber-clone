@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import axios from 'axios'
+import { UserDataContext } from '../context/UserContext.jsx'
 
 const UserSignup = () => {
   const [firstName, setFirstName] = useState('')
@@ -9,13 +11,30 @@ const UserSignup = () => {
   const [password, setPassword] = useState('')
   const [userData, setUserData] = useState({})
 
-  const submitHandler = (e) => {
+  const navigate = useNavigate()
+
+  const { user, setUser } = React.useContext(UserDataContext)
+
+  const submitHandler = async (e) => {
     e.preventDefault()
-    setUserData({fullName: {firstName: firstName, lastName: lastName}, email: email, password: password})
-    setEmail('')
-    setPassword('')
-    setFirstName('')
-    setLastName('')
+    const newUser = {
+      fullname: { firstname: firstName, lastname: lastName },
+      email: email,
+      password: password
+    }
+
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser)
+    
+    if (response.status === 201) {
+      const data = response.data
+      setUser(data.user)
+      setEmail('')
+      setPassword('')
+      setFirstName('')
+      setLastName('')
+      navigate('/home')
+    }
+
   }
 
   return (
@@ -36,7 +55,7 @@ const UserSignup = () => {
             <h3 className='text-lg mb-2'>Enter password</h3>
             <input value={password} onChange={(e) => setPassword(e.target.value)} className='bg-[#eeee] rounded px-4 py-2 mb-2 border w-full placeholder:text-lg' type="password" required placeholder='Enter password' />
             
-            <button className='bg-[#111] text-white font-semibold rounded px-4 py-2 mt-2 mb-2 text-lg w-full placeholder:text-base'>Login</button>
+            <button className='bg-[#111] text-white font-semibold rounded px-4 py-2 mt-2 mb-2 text-lg w-full placeholder:text-base'>Create an account</button>
           </div>
         </form>
         <Link to='/UserLogin' className='text-blue-600'>Already have an account? Log in</Link>

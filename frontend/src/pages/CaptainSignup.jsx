@@ -36,7 +36,7 @@ const CaptainSignup = () => {
               <h3 className='text-lg mb-2'>Enter password</h3>
               <input value={password} onChange={(e) => setPassword(e.target.value)} className='bg-[#eeee] rounded px-4 py-2 mb-2 border w-full placeholder:text-lg' type="password" required placeholder='Enter password' />
               
-              <button className='bg-[#111] text-white font-semibold rounded px-4 py-2 mt-2 mb-2 text-lg w-full placeholder:text-base'>Login</button>
+              <button className='bg-[#111] text-white font-semibold rounded px-4 py-2 mt-2 mb-2 text-lg w-full placeholder:text-base'>Create an account</button>
             </div>
           </form>
           <Link to='/CaptainLogin' className='text-blue-600'>Already have an account? Log in</Link>
