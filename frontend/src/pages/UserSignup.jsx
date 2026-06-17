@@ -28,12 +28,13 @@ const UserSignup = () => {
     if (response.status === 201) {
       const data = response.data
       setUser(data.user)
-      setEmail('')
-      setPassword('')
-      setFirstName('')
-      setLastName('')
+      localStorage.setItem('token', data.token)
       navigate('/home')
     }
+    setEmail('')
+    setPassword('')
+    setFirstName('')
+    setLastName('')
 
   }
 
@@ -58,7 +59,7 @@ const UserSignup = () => {
             <button className='bg-[#111] text-white font-semibold rounded px-4 py-2 mt-2 mb-2 text-lg w-full placeholder:text-base'>Create an account</button>
           </div>
         </form>
-        <Link to='/UserLogin' className='text-blue-600'>Already have an account? Log in</Link>
+        <Link to='/userlogin' className='text-blue-600'>Already have an account? Log in</Link>
       </div>
       <div>
           <p className='text-[10px] leading-tight'>This site is proteted by reCAPTCHA and the <span className='underline'>Google Privacy Policy</span> and <span className='underline'>Terms of Service</span> applies.</p>
