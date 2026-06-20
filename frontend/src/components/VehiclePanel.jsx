@@ -11,6 +11,7 @@ const VehiclePanel = (props) => {
         <h3 className='text-2xl text-bold mb-5'>Choose a vehicle</h3>
         <div onClick={() => {
             props.setConfirmRidePanelOpen(true)
+            props.setVehiclePanelOpen(false)
         }} className='flex border-2 active:border-black  rounded-lg p-3 mb-3 items-center justify-between'>
           <img className='h-[50px]' src="https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=956/height=538/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy85MDM0YzIwMC1jZTI5LTQ5ZjEtYmYzNS1lOWQyNTBlODIxN2EucG5n" alt="" />
           <div className='w-full p-2'>
@@ -22,6 +23,7 @@ const VehiclePanel = (props) => {
         </div>
         <div onClick={() => {
             props.setConfirmRidePanelOpen(true)
+            props.setVehiclePanelOpen(false)
         }} className='flex border-2 active:border-black  rounded-lg p-3 mb-3 items-center justify-between'>
           <img className='h-[60px] ml-3' src="https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=552/height=552/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy85NTM4NTEyZC1mZGUxLTRmNzMtYmQ1MS05Y2VmZjRlMjU0ZjEucG5n" alt="" />
           <div className='w-full p-2 ml-3'>
@@ -33,6 +35,7 @@ const VehiclePanel = (props) => {
         </div>
         <div onClick={() => {
             props.setConfirmRidePanelOpen(true)
+            props.setVehiclePanelOpen(false)
         }} className='flex border-2 active:border-black  rounded-lg p-3 mb-3 items-center justify-between'>
           <img className='h-[80px]' src="https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=552/height=552/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy9mYzEwMWZmOC04MWExLTQ2YzMtOTk1YS02N2I0YmJkMmYyYmYuanBn" alt="" />
           <div className='w-full p-2'>
