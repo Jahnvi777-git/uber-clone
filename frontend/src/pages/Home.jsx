@@ -3,6 +3,8 @@ import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import 'remixicon/fonts/remixicon.css'
 import LocationSearchPanel from '../components/LocationSearchPanel'
+import VehiclePanel from '../components/VehiclePanel'
+import ConfirmedRide from '../components/ConfirmedRide'
 
 const Home = () => {
   const [pickup, setPickup] = React.useState('')
@@ -10,8 +12,10 @@ const Home = () => {
   const [panelOpen, setPanelOpen] = React.useState(false)
   const panelRef = React.useRef(null)
   const panelCloseRef = useRef(null)
+  const confirmedRidePanelRef = useRef(null)
   const [vehiclePanelOpen, setVehiclePanelOpen] = React.useState(false)
   const vehiclePanelRef = useRef(null)
+  const [confirmRidePanelOpen, setConfirmRidePanelOpen] = React.useState(false)
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -28,6 +32,15 @@ const Home = () => {
       gsap.to(panelCloseRef.current, {opacity: 0})
     }
   }, [panelOpen])
+
+  useGSAP(() => {
+    if(confirmRidePanelOpen) {
+      gsap.to(confirmedRidePanelRef.current, {transform: 'translateY(0%)'})
+    }
+    else {
+      gsap.to(confirmedRidePanelRef.current, {transform: 'translateY(100%)'})
+    }
+  }, [confirmRidePanelOpen])
 
   useGSAP(() => {
     if(vehiclePanelOpen) {
@@ -76,35 +89,11 @@ const Home = () => {
           <LocationSearchPanel setPanelOpen={setPanelOpen} setVehiclePanelOpen={setVehiclePanelOpen} />
         </div>
       </div>
-      <div ref={vehiclePanelRef} className='fixed w-full z-10 bottom-0  bg-white py-8 px-3'>
-        <h3 className='text-2xl text-bold mb-5'>Choose a vehicle</h3>
-        <div className='flex border-2 active:border-black  rounded-lg p-3 mb-3 items-center justify-between'>
-          <img className='h-[50px]' src="https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=956/height=538/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy85MDM0YzIwMC1jZTI5LTQ5ZjEtYmYzNS1lOWQyNTBlODIxN2EucG5n" alt="" />
-          <div className='w-full p-2'>
-            <h4 className='font-semibold text-base'>UberGo <span><i className='ri-user-3-fill'></i>4</span></h4>
-            <h5 className='font-medium text-sm'>2 min away</h5>
-            <p className='font-normal text-xs text-gray-600'>Afforable, compact rides</p>
-          </div>
-          <h2 className='text-2xl font-semibold'>₹777.77</h2>
-        </div>
-        <div className='flex border-2 active:border-black  rounded-lg p-3 mb-3 items-center justify-between'>
-          <img className='h-[60px] ml-3' src="https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=552/height=552/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy85NTM4NTEyZC1mZGUxLTRmNzMtYmQ1MS05Y2VmZjRlMjU0ZjEucG5n" alt="" />
-          <div className='w-full p-2 ml-3'>
-            <h4 className='font-semibold text-base'>Moto <span><i className='ri-user-3-fill'></i>1</span></h4>
-            <h5 className='font-medium text-sm'>3 min away</h5>
-            <p className='font-normal text-xs text-gray-600'>Afforable, motorcycle ride</p>
-          </div>
-          <h2 className='text-2xl font-semibold'>₹222.22</h2>
-        </div>
-        <div className='flex border-2 active:border-black  rounded-lg p-3 mb-3 items-center justify-between'>
-          <img className='h-[80px]' src="https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=552/height=552/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy9mYzEwMWZmOC04MWExLTQ2YzMtOTk1YS02N2I0YmJkMmYyYmYuanBn" alt="" />
-          <div className='w-full p-2'>
-            <h4 className='font-semibold text-base'>Uber Auto <span><i className='ri-user-3-fill'></i>3</span></h4>
-            <h5 className='font-medium text-sm'>3 min away</h5>
-            <p className='font-normal text-xs text-gray-600'>Afforable auto rides</p>
-          </div>
-          <h2 className='text-2xl font-semibold'>₹444.44</h2>
-        </div>
+      <div ref={vehiclePanelRef} className='fixed w-full z-10 bottom-0  bg-white py-10 px-3 pt-12'>
+        <VehiclePanel setVehiclePanelOpen={setVehiclePanelOpen} setConfirmRidePanelOpen={setConfirmRidePanelOpen} />
+      </div>
+      <div ref={confirmedRidePanelRef} className='fixed w-full z-10 bottom-0  bg-white py-10 px-3 pt-12'>
+        <ConfirmedRide setConfirmRidePanelOpen={setConfirmRidePanelOpen} setVehiclePanelOpen={setVehiclePanelOpen} />
       </div>
     </div>
   )
