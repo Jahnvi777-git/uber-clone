@@ -1,6 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import CaptainRiding from '../pages/CaptainRiding'
 
 const ConfirmRidePopup = (props) => {
+    const [otp, setOtp] = React.useState('')
+    
+    const submitHandler = (e) => {
+        e.preventDefault()
+    }
+    
   return (
     <div>
         <h4 onClick={() => {
@@ -9,7 +17,7 @@ const ConfirmRidePopup = (props) => {
         }} className='p-2 w-[93%] text-gray-300 text-center text-2xl absolute top-0'>
           <i className="ri-arrow-down-wide-line"></i>
         </h4>
-        <h3 className='text-2xl text-center font-semibold mb-5'>Ride confirmed :D</h3>
+        <h3 className='text-2xl text-center font-semibold mb-5'>Confirm this ride to start</h3>
         
         <div className='flex items-center justify-between p-3 bg-gray-200 rounded-lg'>
             <div className='flex items-center gap-3'>
@@ -55,14 +63,21 @@ const ConfirmRidePopup = (props) => {
             </div>
         </div>
 
+        <div className='mt-6 w-full'>
+            <form onSubmit={(e) => submitHandler(e)}>
+                <input type="text" placeholder='Enter OTP' className='bg-[#eee] px-6 py-4 text-lg font-mono rounded-lg w-full'
+                onChange={(e)=> {setOtp(e.target.value)}} value={otp}/>
+                <Link to='/captain-riding' onClick={() => {
+                }} className='w-full flex justify-center bg-green-400 text-white rounded-md font-semibold p-2 px-4 mt-5'>Accept</Link>
 
-        <button onClick={() => {
-        }} className='w-full bg-green-400 text-white rounded-md font-semibold p-2 mb-6'>Confirm</button>
+                <button onClick={() => {
+                    props.setConfirmRidePopupPanel(false)
+                    props.setRidePopupPanel(false)
+                }} className='w-full bg-red-600 mt-3 text-black rounded-md font-semibold p-2 px-4'>Cancel</button>
+            </form>
 
-        <button onClick={() => {
-            props.setConfirmRidePopupPanel(false)
-            props.setRidePopupPanel(false)
-        }} className='w-full bg-red-600 text-black rounded-md font-semibold p-2'>Cancel</button>
+        </div>
+
     </div>
   )
 }
