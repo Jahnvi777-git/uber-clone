@@ -99,7 +99,7 @@ const Home = () => {
               onChange={(e) => setPickup(e.target.value)}
               onClick={() => setPanelOpen(true)}
             />
-            <input 
+            <input se
               className='bg-[#eee] px-12 py-2 text-lg rounded-lg w-full' 
               type="text" 
               placeholder='Enter your destination'
